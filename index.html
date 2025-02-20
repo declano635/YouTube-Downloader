@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Downloader</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    #status {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    #loadingIndicator {
+      display: none;
+    }
+    
+    #profile {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+    }
+    
+    #profile img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    
+    #progressContainer {
+      width: 100%;
+      height: 20px;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 15px;
+    }
+    
+    #progressBar {
+      width: 0%;
+      height: 100%;
+      background-color: #4CAF50;
+      transition: width 0.3s ease-in-out;
+    }
+    
+    #progressText {
+      text-align: center;
+      margin-top: 5px;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    
+    button:hover:not(:disabled) {
+      background-color: #45a049;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Video Downloader</h1>
+    
+    <button id="authButton">Sign in with YouTube</button>
+    
+    <div id="profile">
+      <img id="profilePicture" src="" alt="Profile Picture">
+      <span id="profileName"></span>
+    </div>
+    
+    <div class="form-group">
+      <label for="query">Search Query:</label>
+      <input type="text" id="query" placeholder="Enter a keyword (e.g., history)">
+    </div>
+    
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select id="category">
+        <option value="1">Film & Animation</option>
+        <option value="2">Autos & Vehicles</option>
+        <option value="10">Music</option>
+        <option value="17">Sports</option>
+        <option value="20">Gaming</option>
+        <option value="23">Comedy</option>
+        <option value="24">Entertainment</option>
+        <option value="25">News & Politics</option>
+        <option value="26">Howto & Style</option>
+        <option value="27">Education</option>
+        <option value="28">Science & Technology</option>
+        <option value="29">Nonprofits & Activism</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="numVideos">Number of Videos:</label>
+      <input type="number" id="numVideos" min="1" value="1">
+    </div>
+    
+    <div class="form-group">
+      <label><input type="checkbox" id="useRecommended"> Download Recommended Videos</label>
+      <label><input type="checkbox" id="useWatchLater"> Download Watch Later Videos</label>
+      <label><input type="checkbox" id="useUnwatched"> Download Unwatched Videos from Subscribed Channels</label>
+    </div>
+    
+    <button id="selectFolder">Select Folder</button>
+    <div id="folderPath">No folder selected</div>
+    
+    <button id="startDownload">Start Download</button>
+    
+    <div id="progressContainer">
+      <div id="progressBar"></div>
+    </div>
+    <div id="progressText">0%</div>
+    
+    <div id="status">Status: Ready</div>
+    <div id="loadingIndicator">Loading...</div>
+  </div>
+  
+  <script src="renderer.js"></script>
+</body>
+</html>
